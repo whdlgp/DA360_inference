@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# uv
+.python-version
+uv.lock
+
+# IDE
+.vscode/
+.idea/
+
+# Test and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# input and output images
+input/
+output/
+
+# Downloaded checkpoints
+checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db

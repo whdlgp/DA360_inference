@@ -1,0 +1,18 @@
+[project]
+name = "da360-infer"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "opencv-python>=5.0.0.93",
+    "torch",
+    "torchvision",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+torchvision = { index = "pytorch" }
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu132"
+explicit = true
