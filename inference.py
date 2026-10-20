@@ -27,6 +27,21 @@ def save_depth(depth: np.ndarray, output_path: str | Path) -> None:
     print(f"Saved depth map: {output_path}")
 
 
+def save_depth_vis(depth: np.ndarray, output_path: str | Path) -> None:
+    """Save a colorized depth map for visualization."""
+    depth = depth.astype(np.float32)
+    normalized_depth = cv2.normalize(depth, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+    depth_visualization = cv2.applyColorMap(normalized_depth, cv2.COLORMAP_TURBO)
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if not cv2.imwrite(str(output_path), depth_visualization):
+        raise OSError(f"Could not save depth visualization: {output_path}")
+
+    print(f"Saved depth visualization: {output_path}")
+
+
 def main() -> None:
     # Read image
     input_dir = Path("input")
@@ -40,7 +55,7 @@ def main() -> None:
         Path("checkpoints/DA360_small.pth"),
     ]
     # Depth at the center region, mm 
-    front_distance_mm = 5000.0
+    front_distance_mm = 3000.0
 
     for checkpoint_path in checkpoint_paths:
         # init
@@ -53,6 +68,8 @@ def main() -> None:
         output_dir = Path("output")
         output_file = image_file.with_name(f"{image_file.stem}_{checkpoint_path.stem}_depth.png")
         save_depth(depth, output_dir / output_file)
+        output_vis_file = image_file.with_name(f"{image_file.stem}_{checkpoint_path.stem}_depth_vis.png")
+        save_depth_vis(depth, output_dir / output_vis_file)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,8 @@
 # DA360_inference
 An unofficial inference-only implementation of DA360 for 360° equirectangular depth estimation
 
+![da360_depth_comparison](demo_output/da360_depth_comparison.png)
+
 ## Checkpoints
 
 Download checkpoints [here](https://huggingface.co/hljiang/DA360).  
@@ -37,3 +39,33 @@ uv sync
 ```bash
 uv run inference.py
 ```
+
+## Results
+
+<details>
+<summary>Input image</summary>
+
+![input_image](input/input.jpg)
+
+</details>
+
+<details>
+<summary>DA360 Large depth visualized</summary>
+
+![DA360 Large](demo_output/input_DA360_large_depth_vis.png)
+
+</details>
+
+<details>
+<summary>DA360 Base depth visualized</summary>
+
+![DA360 Base](demo_output/input_DA360_base_depth_vis.png)
+
+</details>
+
+<details>
+<summary>DA360 Small depth visualized</summary>
+
+![DA360 Small](demo_output/input_DA360_small_depth_vis.png)
+
+</details>
