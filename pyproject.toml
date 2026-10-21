@@ -3,6 +3,9 @@ name = "da360-infer"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+    "onnx>=1.23.2",
+    "onnxruntime>=1.31.0",
+    "onnxsim>=0.8.1",
     "opencv-python>=5.0.0.93",
     "torch",
     "torchvision",
