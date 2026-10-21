@@ -5,7 +5,6 @@ import torch
 import torch.nn as nn
 
 from depth_creator import DA360DepthCreator
-from depth_creator.DA360 import imple_da360
 
 
 class Wrapper(nn.Module):

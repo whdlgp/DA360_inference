@@ -1,9 +1,9 @@
 from pathlib import Path
 
+import argparse
 import cv2
 import numpy as np
 import onnxruntime as ort
-import argparse
 
 
 def read_image(image_path: str | Path) -> np.ndarray:
@@ -25,6 +25,21 @@ def save_depth(depth: np.ndarray, output_path: str | Path) -> None:
         raise OSError(f"Could not save depth image: {output_path}")
 
     print(f"Saved depth map: {output_path}")
+
+
+def save_depth_vis(depth: np.ndarray, output_path: str | Path) -> None:
+    """Save a colorized depth map for visualization."""
+    depth = depth.astype(np.float32)
+    normalized_depth = cv2.normalize(depth, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+    depth_visualization = cv2.applyColorMap(normalized_depth, cv2.COLORMAP_TURBO)
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if not cv2.imwrite(str(output_path), depth_visualization):
+        raise OSError(f"Could not save depth visualization: {output_path}")
+
+    print(f"Saved depth visualization: {output_path}")
 
 
 def preprocess_image(img: np.ndarray, width: int, height: int) -> np.ndarray:
@@ -96,6 +111,8 @@ def main() -> None:
     output_dir = Path("output")
     output_file = image_file.with_name(f"{image_file.stem}_{onnx_path.stem}_depth.png")
     save_depth(depth, output_dir / output_file)
+    output_vis_file = image_file.with_name(f"{image_file.stem}_{onnx_path.stem}_depth_vis.png")
+    save_depth_vis(depth, output_dir / output_vis_file)
 
 
 if __name__ == "__main__":
