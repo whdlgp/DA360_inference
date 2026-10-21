@@ -107,6 +107,8 @@ class DinoVisionTransformer(nn.Module):
         self.norm = nn.LayerNorm(embed_dim, eps=1e-6)
 
     def interpolate_pos_encoding(self, x: Tensor, h: int, w: int) -> Tensor:
+        h, w = int(h), int(w)
+
         num_patches = x.shape[1] - 1
         N = self.pos_embed.shape[1] - 1
         if num_patches == N and h == w:
@@ -144,7 +146,7 @@ class DinoVisionTransformer(nn.Module):
 # DPT head (equirectangular padding)
 # --------------------------------------------------------------------------- #
 def erp_pad(x: Tensor, pad: int) -> Tensor:
-    w = x.shape[-1]
+    w = int(x.shape[-1])
     top = torch.flip(torch.roll(x[:, :, :pad, :], w // 2, -1), dims=[-2])
     bottom = torch.flip(torch.roll(x[:, :, -pad:, :], w // 2, -1), dims=[-2])
     x = torch.cat([top, x, bottom], dim=-2)
