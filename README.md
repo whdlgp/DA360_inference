@@ -1,5 +1,5 @@
 # DA360_inference
-An unofficial inference-only implementation of DA360 for 360° equirectangular depth estimation
+An unofficial inference-only implementation of [DA360](https://github.com/antigravity-tech/DA360) for 360° equirectangular depth estimation
 
 ![da360_depth_comparison](demo_output/da360_depth_comparison.png)
 
