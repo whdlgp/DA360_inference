@@ -40,6 +40,27 @@ uv sync
 uv run inference.py
 ```
 
+## ONNX
+
+Export, verify, and run inference for each model.
+
+```bash
+# DA360 Large
+uv run export_onnx.py --checkpoint checkpoints/DA360_large.pth --simplify
+uv run verify_onnx.py --checkpoint checkpoints/DA360_large.pth --visualize
+uv run inference_onnx.py --onnx_path checkpoints/DA360_large.onnx
+
+# DA360 Base
+uv run export_onnx.py --checkpoint checkpoints/DA360_base.pth --simplify
+uv run verify_onnx.py --checkpoint checkpoints/DA360_base.pth --visualize
+uv run inference_onnx.py --onnx_path checkpoints/DA360_base.onnx
+
+# DA360 Small
+uv run export_onnx.py --checkpoint checkpoints/DA360_small.pth --simplify
+uv run verify_onnx.py --checkpoint checkpoints/DA360_small.pth --visualize
+uv run inference_onnx.py --onnx_path checkpoints/DA360_small.onnx
+```
+
 ## Results
 
 <details>
